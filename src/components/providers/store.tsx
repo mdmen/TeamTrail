@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useRef } from 'react';
-import { type StoreType, initializeStore } from '@/store';
+import { type StoreType, initializeStore } from '@/lib/store';
 
 export const StoreContext = createContext<StoreType | null>(null);
 

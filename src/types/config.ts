@@ -5,3 +5,5 @@ export type InputStyle = 'outlined' | 'filled';
 export type Theme = 'lara-blue';
 
 export type ThemeStyle = 'dark' | 'light';
+
+export type Locale = 'en' | 'ru';

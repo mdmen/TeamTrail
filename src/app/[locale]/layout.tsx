@@ -1,14 +1,19 @@
 import '@/styles/global.css';
 
-import { config } from '@fortawesome/fontawesome-svg-core';
-config.autoAddCss = false;
-
 export { metadata } from './meta';
 import { RootProvider } from '@/components/providers';
+import type { Locale } from '@/types';
 
-export default function RootLayout({ children }: ContainerWithChildren) {
+interface RootLayoutProps extends ContainerWithChildren {
+  params: { locale: Locale };
+}
+
+export default function RootLayout({
+  children,
+  params: { locale },
+}: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <link
           id="theme-link"

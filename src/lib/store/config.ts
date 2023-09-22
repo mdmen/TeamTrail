@@ -1,7 +1,7 @@
 import { persist } from 'zustand/middleware';
 import { type StateCreator } from 'zustand';
 import { appNamespace } from '@/lib';
-import type { Scale, InputStyle, Theme, ThemeStyle } from '@/types';
+import type { Scale, InputStyle, Theme, ThemeStyle, Locale } from '@/types';
 
 export interface ConfigState {
   scale: Scale;
@@ -9,6 +9,7 @@ export interface ConfigState {
   theme: Theme;
   themeStyle: ThemeStyle;
   rippleEffect: boolean;
+  locale: Locale;
 }
 
 export interface ConfigActions {
@@ -17,17 +18,10 @@ export interface ConfigActions {
   setTheme: (theme: Theme) => void;
   setThemeStyle: (themeStyle: ThemeStyle) => void;
   setRippleEffect: (rippleEffect: boolean) => void;
+  setLocale: (locale: Locale) => void;
 }
 
 export type ConfigSlice = ConfigState & ConfigActions;
-
-const getInitialConfigState = (): ConfigState => ({
-  scale: 'regular',
-  inputStyle: 'outlined',
-  theme: 'lara-blue',
-  themeStyle: 'light',
-  rippleEffect: false,
-});
 
 export const createConfigSlice: StateCreator<
   ConfigSlice,
@@ -35,21 +29,35 @@ export const createConfigSlice: StateCreator<
   [],
   ConfigSlice
 > = (set) => ({
-  ...getInitialConfigState(),
+  scale: 'regular',
+  inputStyle: 'outlined',
+  theme: 'lara-blue',
+  themeStyle: 'light',
+  rippleEffect: false,
+  locale: 'en',
   setScale: (scale: Scale) => set({ scale }),
   setInputStyle: (inputStyle: InputStyle) => set({ inputStyle }),
   setTheme: (theme: Theme) => set({ theme }),
   setThemeStyle: (themeStyle: ThemeStyle) => set({ themeStyle }),
   setRippleEffect: (rippleEffect: boolean) => set({ rippleEffect }),
+  setLocale: (locale: Locale) => set({ locale }),
 });
 
 export const createPersistedConfigSlice = persist(createConfigSlice, {
   name: `${appNamespace}-config`,
-  partialize: ({ scale, inputStyle, theme, themeStyle, rippleEffect }) => ({
+  partialize: ({
     scale,
     inputStyle,
     theme,
     themeStyle,
     rippleEffect,
+    locale,
+  }) => ({
+    scale,
+    inputStyle,
+    theme,
+    themeStyle,
+    rippleEffect,
+    locale,
   }),
 });

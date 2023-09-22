@@ -1,12 +1,16 @@
-'use client';
-
-import { PrimeReactProvider } from 'primereact/api';
+import { ThemeProvider } from './theme';
 import { StoreProvider } from './store';
+import { SessionProvider } from './session';
+import { I18nProvider } from './i18n';
 
 export const RootProvider = ({ children }: ContainerWithChildren) => {
   return (
-    <PrimeReactProvider>
-      <StoreProvider>{children}</StoreProvider>
-    </PrimeReactProvider>
+    <SessionProvider>
+      <StoreProvider>
+        <ThemeProvider>
+          <I18nProvider>{children}</I18nProvider>
+        </ThemeProvider>
+      </StoreProvider>
+    </SessionProvider>
   );
 };
