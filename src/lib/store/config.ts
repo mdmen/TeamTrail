@@ -1,6 +1,6 @@
 import { persist } from 'zustand/middleware';
 import { type StateCreator } from 'zustand';
-import { appNamespace } from '@/lib';
+import { appNamespace } from '@/lib/helpers';
 import type { Scale, InputStyle, Theme, ThemeStyle, Locale } from '@/types';
 
 export interface ConfigState {
