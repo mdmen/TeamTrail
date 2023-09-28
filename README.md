@@ -8,6 +8,10 @@ screenshot gifs
 
 ...
 
+## Installation
+
+...
+
 ## Made using
 
 <!--- https://github.com/Ileriayo/markdown-badges --->
