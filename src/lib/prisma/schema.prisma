@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
+  name      String
+  nickname  String   @unique
+
+  @@map("users")
+}
+
+model Workspace {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  code      String   @default(cuid())
+  name      String
+
+  @@map("workspaces")
+}
+
+model Task {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  code      String   @default(cuid())
+  index     Int
+  title     String
+
+  @@map("tasks")
+}
+
+model Issue {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  code      String   @default(cuid())
+  title     String
+
+  @@map("issues")
+}
+
+model Board {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  code  String
+
+  @@map("boards")
+}
+
+model TaskList {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  index Int
+
+  @@map("task_lists")
+}
+
+model Page {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  code      String
+
+  @@map("pages")
+}
+
+// Issue/Task
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("comments")
+}
+
+// Chat
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("messages")
+}
+
+enum Role {
+  Admin
+  Moderator
+  Member
+}
