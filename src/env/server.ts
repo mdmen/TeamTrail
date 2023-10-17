@@ -1,4 +1,5 @@
 import z from 'zod';
+import { envCommonSchema } from './common';
 
 const schema = z.object({
   AUTH_GITHUB_ID: z.string().trim().min(1),
@@ -19,4 +20,4 @@ if (!parsed.success) {
   throw Error('There is an error with the environment variables');
 }
 
-export const envServerSchema = parsed.data;
+export const envServerSchema = { ...envCommonSchema, ...parsed.data };

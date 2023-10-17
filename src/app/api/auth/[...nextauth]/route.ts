@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
-import { envServerSchema } from '@/lib/env/server';
+import { envServerSchema } from '@/env/server';
 
 const handler = NextAuth({
   providers: [

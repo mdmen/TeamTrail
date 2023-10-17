@@ -1,6 +1,6 @@
 # TeamTrail
 
-[![GNU AGPLv3 license](https://img.shields.io/badge/GNU_AGPLv3-License-blue.svg?style=flat-square)](./LICENSE)
+[![GNU General Public License v3.0](https://img.shields.io/badge/GNU_GPLv3-License-blue.svg?style=flat-square)](./LICENSE)
 
 screenshot gifs
 
@@ -21,7 +21,7 @@ screenshot gifs
 [ts-badge]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
 [next-badge]: https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white
 [tailwind-badge]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
-[primereact-badge]: https://img.shields.io/badge/primereact-07c4e8.svg?style=for-the-badge&logoColor=white
+[primereact-badge]: https://img.shields.io/badge/primereact-07c4e8.svg?style=for-the-badge&logo=react&logoColor=white
 [mongo-badge]: https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white
 [prisma-badge]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
 [apollo-badge]: https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql

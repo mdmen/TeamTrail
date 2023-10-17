@@ -5,6 +5,8 @@
     "bradlc.vscode-tailwindcss",
     "editorconfig.editorconfig",
     "prisma.prisma",
-    "ms-azuretools.vscode-docker"
+    "ms-azuretools.vscode-docker",
+    "graphql.vscode-graphql",
+    "graphql.vscode-graphql-syntax"
   ]
 }

@@ -13,3 +13,7 @@ export function getThemeName(theme: Theme, themeStyle: ThemeStyle): string {
 
   return themes[theme];
 }
+
+export function isServer() {
+  return typeof window === 'undefined';
+}
