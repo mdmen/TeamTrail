@@ -8,7 +8,3 @@ indent_style = space
 insert_final_newline = true
 max_line_length = 80
 tab_width = 2
-
-[Makefile]
-indent_style = tab
-indent_size = 2

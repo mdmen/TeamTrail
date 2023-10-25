@@ -12,7 +12,7 @@ import { envCommonSchema } from '@/env/common';
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: envCommonSchema.SITE_URL,
+    uri: envCommonSchema.NEXT_PUBLIC_API_URL,
   });
 
   return new NextSSRApolloClient({
@@ -28,7 +28,7 @@ function makeClient() {
   });
 }
 
-export function ApolloPrivider({ children }: ContainerWithChildren) {
+export function GraphQLProvider({ children }: React.PropsWithChildren) {
   return (
     <ApolloNextAppProvider makeClient={makeClient}>
       {children}

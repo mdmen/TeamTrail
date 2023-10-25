@@ -8,7 +8,7 @@ export const StoreContext = createContext<StoreType | null>(null);
 export const StoreProvider = ({
   children,
   ...props
-}: ContainerWithChildren) => {
+}: React.PropsWithChildren) => {
   const storeRef = useRef<StoreType>();
 
   if (!storeRef.current) {

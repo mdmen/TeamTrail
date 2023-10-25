@@ -2,12 +2,12 @@ import z from 'zod';
 
 const schema = z.object({
   NODE_ENV: z.union([z.literal('development'), z.literal('production')]),
-  SITE_URL: z.string().trim().min(8),
+  NEXT_PUBLIC_API_URL: z.string().trim().min(8),
 });
 
 const parsed = schema.safeParse({
   NODE_ENV: process.env.NODE_ENV,
-  SITE_URL: process.env.SITE_URL,
+  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 if (!parsed.success) {

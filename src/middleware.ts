@@ -1,10 +1,19 @@
-import { type NextRequest } from 'next/server';
-import { i18nMiddleware } from '@/lib/middlewares';
+import { createI18nMiddleware } from 'next-international/middleware';
+import { authMiddleware } from '@clerk/nextjs';
+import type { Locale } from './types';
 
-export function middleware(request: NextRequest) {
-  return i18nMiddleware(request);
-}
+const i18nMiddleware = createI18nMiddleware({
+  locales: ['en', 'ru'] satisfies Locale[],
+  defaultLocale: 'en',
+});
+
+export default authMiddleware({
+  beforeAuth: (req) => {
+    return i18nMiddleware(req);
+  },
+  publicRoutes: ['/:locale/sign-up', '/:locale/sign-in'],
+});
 
 export const config = {
-  matcher: ['/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)'],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/'],
 };

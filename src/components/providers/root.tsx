@@ -1,19 +1,24 @@
 import { ThemeProvider } from './theme';
 import { StoreProvider } from './store';
-import { SessionProvider } from './session';
+import { AuthProvider } from './auth';
 import { I18nProvider } from './i18n';
-import { ApolloPrivider } from './apollo';
+import { GraphQLProvider } from './graphql';
+import type { Locale } from '@/types';
 
-export const RootProvider = ({ children }: ContainerWithChildren) => {
+interface RootProviderProps extends React.PropsWithChildren {
+  locale: Locale;
+}
+
+export const RootProvider = ({ locale, children }: RootProviderProps) => {
   return (
-    <SessionProvider>
-      <ApolloPrivider>
+    <AuthProvider>
+      <GraphQLProvider>
         <StoreProvider>
           <ThemeProvider>
-            <I18nProvider>{children}</I18nProvider>
+            <I18nProvider locale={locale}>{children}</I18nProvider>
           </ThemeProvider>
         </StoreProvider>
-      </ApolloPrivider>
-    </SessionProvider>
+      </GraphQLProvider>
+    </AuthProvider>
   );
 };
