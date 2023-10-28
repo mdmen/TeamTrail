@@ -9,7 +9,7 @@ interface RootProviderProps extends React.PropsWithChildren {
   locale: Locale;
 }
 
-export const RootProvider = ({ locale, children }: RootProviderProps) => {
+export function RootProvider({ locale, children }: RootProviderProps) {
   return (
     <AuthProvider>
       <GraphQLProvider>
@@ -21,4 +21,4 @@ export const RootProvider = ({ locale, children }: RootProviderProps) => {
       </GraphQLProvider>
     </AuthProvider>
   );
-};
+}

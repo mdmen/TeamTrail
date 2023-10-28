@@ -1,6 +1,6 @@
 html {
   font-family: var(--font-family);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   height: 100%;
   -webkit-font-smoothing: antialiased;
@@ -20,6 +20,14 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
+  margin: 0 0 1.5rem 0;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--surface-900);
   text-wrap: balance;
+  scroll-margin-top: 8rem;
 }

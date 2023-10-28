@@ -1,8 +1,11 @@
-import { type Metadata } from 'next';
+import { getI18n } from '@/locales/server';
 
-export const metadata: Metadata = {
-  title: 'Welcome to the TeamTrail',
-  description: 'Fullstack TypeScript collaboration app',
-  colorScheme: 'light dark',
-  viewport: 'width=device-width, initial-scale=1',
-};
+export async function generateMetadata() {
+  const t = await getI18n();
+
+  return {
+    title: t('page.home.title'),
+    description: t('page.home.description'),
+    colorScheme: 'light dark',
+  };
+}

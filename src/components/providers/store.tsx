@@ -5,10 +5,7 @@ import { type StoreType, initializeStore } from '@/lib/store';
 
 export const StoreContext = createContext<StoreType | null>(null);
 
-export const StoreProvider = ({
-  children,
-  ...props
-}: React.PropsWithChildren) => {
+export function StoreProvider({ children, ...props }: React.PropsWithChildren) {
   const storeRef = useRef<StoreType>();
 
   if (!storeRef.current) {
@@ -20,4 +17,4 @@ export const StoreProvider = ({
       {children}
     </StoreContext.Provider>
   );
-};
+}

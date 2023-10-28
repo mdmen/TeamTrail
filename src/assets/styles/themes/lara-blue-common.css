@@ -1,0 +1,8 @@
+:root {
+  font-family: var(--font-inter), sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-variation-settings: normal;
+
+  --font-family: var(--font-inter), sans-serif;
+  --font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}

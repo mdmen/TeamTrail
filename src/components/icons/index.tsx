@@ -1,1 +1,1 @@
-export { Camera } from 'lucide-react';
+export { Languages, Sun, Moon } from 'lucide-react';
