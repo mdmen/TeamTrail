@@ -10,7 +10,9 @@ export function ThemeSwitcher() {
   const isMounted = useMounted();
 
   const isDark = resolvedTheme === 'dark';
-  const label = isDark ? 'Switch to light theme' : 'Switch to dark theme';
+  const label = isDark
+    ? 'Switch to the light theme'
+    : 'Switch to the dark theme';
   const icon = isDark ? <Moon /> : <Sun />;
 
   return (

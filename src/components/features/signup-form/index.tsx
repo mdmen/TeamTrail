@@ -5,45 +5,30 @@ import { useSignUp } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, FormRow, Divider, FormSkeleton, Toast } from '@/components/ui';
 import {
-  Button,
-  FormRow,
-  Divider,
-  FormSkeleton,
-  Toast,
-  Message,
-} from '@/components/ui';
-import { SignUpFormTextField, SignUpFormPassword } from '../fields';
+  SignUpFormTextField,
+  SignUpFormPassword,
+} from '@/components/features/hook-form-fields';
 import {
   FormSignUpFields,
-  formSignUpSchema,
-  initialSignUpValues,
-  FormVerifyFields,
-  initialVerifyValues,
-  SignUpFields,
-  VerifyFields,
-  formVerifySchema,
-  CommonAuthFields,
-} from '../schemas';
+  formSchema,
+  initialValues,
+  FormFields,
+} from './schema';
 import { useI18n } from '@/locales/client';
-import { handleAuthError } from '../utils';
+import { handleAuthError } from '@/lib/helpers';
 
 export function SignUpForm() {
   const t = useI18n();
   const router = useRouter();
   const toast = useRef<Toast>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isVerification, setIsVerification] = useState(false);
-  const { isLoaded, signUp, setActive } = useSignUp();
+  const { isLoaded, signUp } = useSignUp();
   const { control, handleSubmit } = useForm<FormSignUpFields>({
-    resolver: zodResolver(formSignUpSchema),
-    defaultValues: initialSignUpValues,
+    resolver: zodResolver(formSchema),
+    defaultValues: initialValues,
   });
-  const { control: verifyFormControl, handleSubmit: handleVerifySubmit } =
-    useForm<FormVerifyFields>({
-      resolver: zodResolver(formVerifySchema),
-      defaultValues: initialVerifyValues,
-    });
 
   if (!isLoaded) {
     return <FormSkeleton rows={4} />;
@@ -71,68 +56,12 @@ export function SignUpForm() {
         strategy: 'email_code',
       });
 
-      setIsVerification(true);
-    } catch (error: unknown) {
-      handleAuthError(error, toast, t);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const onVerify: SubmitHandler<FormVerifyFields> = async ({ code }) => {
-    try {
-      setIsLoading(true);
-
-      const result = await signUp.attemptEmailAddressVerification({
-        code,
-      });
-
-      if (result.status === 'complete') {
-        await setActive({ session: result.createdSessionId });
-        router.push('/');
-        return;
-      }
-
-      throw Error('Clerk is not configured for email address verification');
+      router.push('/sign-up/verify');
     } catch (error: unknown) {
       handleAuthError(error, toast, t);
       setIsLoading(false);
     }
   };
-
-  if (isVerification) {
-    return (
-      <form key="verify" onSubmit={handleVerifySubmit(onVerify)}>
-        <Toast ref={toast} />
-        <FormRow>
-          <Message
-            className="w-full"
-            severity="info"
-            text={t('form.code.help')}
-          />
-        </FormRow>
-        <FormRow>
-          <SignUpFormTextField
-            label={t('form.code.label')}
-            autoComplete="off"
-            control={verifyFormControl}
-            name={VerifyFields.CODE}
-            disabled={isLoading}
-            autoFocus
-            required
-          />
-        </FormRow>
-        <FormRow noMargin>
-          <Button
-            label={t('button.send')}
-            type="submit"
-            className="w-full"
-            loading={isLoading}
-          />
-        </FormRow>
-      </form>
-    );
-  }
 
   return (
     <form key="signUp" onSubmit={handleSubmit(onSignUp)}>
@@ -142,9 +71,10 @@ export function SignUpForm() {
           label={t('form.username.label')}
           autoComplete="username"
           control={control}
-          name={CommonAuthFields.USERNAME}
+          name={FormFields.USERNAME}
           disabled={isLoading}
           autoFocus
+          minLength={3}
           required
         />
       </FormRow>
@@ -153,7 +83,7 @@ export function SignUpForm() {
           label={t('form.email.label')}
           autoComplete="email"
           control={control}
-          name={CommonAuthFields.EMAIL}
+          name={FormFields.EMAIL}
           disabled={isLoading}
           type="email"
           required
@@ -161,9 +91,11 @@ export function SignUpForm() {
       </FormRow>
       <FormRow>
         <SignUpFormPassword
-          name={CommonAuthFields.PASSWORD}
+          name={FormFields.PASSWORD}
           control={control}
           disabled={isLoading}
+          feedback
+          required
         />
       </FormRow>
       <FormRow multipleRowFields>
@@ -172,14 +104,14 @@ export function SignUpForm() {
           autoComplete="given-name"
           control={control}
           disabled={isLoading}
-          name={SignUpFields.FIRSTNAME}
+          name={FormFields.FIRSTNAME}
         />
         <SignUpFormTextField
           label="Last name"
           autoComplete="family-name"
           control={control}
           disabled={isLoading}
-          name={SignUpFields.LASTNAME}
+          name={FormFields.LASTNAME}
         />
       </FormRow>
       <FormRow noMargin>

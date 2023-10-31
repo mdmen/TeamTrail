@@ -8,6 +8,5 @@ export { OverlayPanel } from 'primereact/overlaypanel';
 export { Toast } from 'primereact/toast';
 export { Message } from 'primereact/message';
 
-export { FloatLabel } from './float-label';
 export { Spinner } from './spinner';
-export { FormRow, FormSkeleton } from './form-layout';
+export { FormRow, FormSkeleton, FloatLabel } from './form-layout';

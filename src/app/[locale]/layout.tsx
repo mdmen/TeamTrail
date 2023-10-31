@@ -1,5 +1,6 @@
 import { RootProvider } from '@/components/providers/root';
-import { fontInter } from './fonts';
+import { fontInter, fontCoiny } from './fonts';
+import { cn } from '@/lib/helpers';
 import type { Locale } from '@/types';
 
 import '@/assets/styles/global.css';
@@ -15,7 +16,11 @@ export default function RootLayout({
   params: { locale },
 }: RootLayoutProps) {
   return (
-    <html suppressHydrationWarning lang={locale} className={fontInter.variable}>
+    <html
+      suppressHydrationWarning
+      lang={locale}
+      className={cn(fontInter.variable, fontCoiny.variable)}
+    >
       <body>
         <RootProvider locale={locale}>{children}</RootProvider>
       </body>

@@ -31,3 +31,23 @@ h6 {
   text-wrap: balance;
   scroll-margin-top: 8rem;
 }
+
+p {
+  margin: 0 0 1rem;
+}
+
+p a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  font-family: var(--font-coiny), sans-serif;
+  color: var(--surface-800);
+  line-height: 1;
+}

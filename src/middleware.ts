@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { createI18nMiddleware } from 'next-international/middleware';
 import { authMiddleware } from '@clerk/nextjs';
 import type { Locale } from './types';
@@ -11,7 +12,25 @@ export default authMiddleware({
   beforeAuth: (req) => {
     return i18nMiddleware(req);
   },
-  publicRoutes: ['/:locale/sign-up', '/:locale/sign-in'],
+  afterAuth({ userId, isPublicRoute }, req) {
+    if (!isPublicRoute && !userId) {
+      return NextResponse.redirect(
+        new URL(process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL as string, req.url),
+      );
+    } else if (isPublicRoute && userId) {
+      return NextResponse.redirect(
+        new URL(
+          process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL as string,
+          req.url,
+        ),
+      );
+    }
+  },
+  publicRoutes: [
+    '/:locale/sign-up',
+    '/:locale/sign-up/verify',
+    '/:locale/sign-in',
+  ],
 });
 
 export const config = {

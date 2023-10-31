@@ -6,6 +6,7 @@ import { InputText, FloatLabel } from '@/components/ui';
 interface SingUpFormTextFieldProps<TFields extends {}> {
   name: Path<TFields>;
   label: string;
+  minLength?: number;
   required?: boolean;
   disabled?: boolean;
   autoComplete?: string;
@@ -19,6 +20,7 @@ export function SignUpFormTextField<TFields extends {}>({
   type = 'text',
   autoFocus,
   disabled,
+  minLength = 0,
   required,
   autoComplete,
   label,
@@ -53,7 +55,9 @@ export function SignUpFormTextField<TFields extends {}>({
           </FloatLabel>
           {!!fieldState.error && (
             <span id={`${field.name}-error`} className={cn('p-error')}>
-              {t(fieldState.error.message as 'stub')}
+              {t(fieldState.error.message as 'form.required', {
+                count: minLength,
+              })}
             </span>
           )}
         </div>
