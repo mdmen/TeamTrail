@@ -1,136 +1,73 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef, useEffect, useReducer } from 'react';
 import { useSignUp } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, FormRow, Divider, FormSkeleton, Toast } from '@/components/ui';
-import {
-  SignUpFormTextField,
-  SignUpFormPassword,
-} from '@/components/features/hook-form-fields';
-import {
-  FormSignUpFields,
-  formSchema,
-  initialValues,
-  FormFields,
-} from './schema';
+import { SignUpCredentialsForm } from './credentials-form';
+import { FormSkeleton, Toast } from '@/components/ui';
 import { useI18n } from '@/locales/client';
-import { handleAuthError } from '@/lib/helpers';
+import { SignUpEmailVerifyForm } from './email-verify-form';
+import { SignUpMissingFieldsForm } from './missing-fields-form';
+import { handleAPIError } from '@/lib/helpers';
+import { shouldVerifyEmailByCode, shouldFillMissingFields } from './utils';
+import { useCreateDatabaseUser } from './hooks';
+import { getFormStateAction, initialState, reducer } from './state';
+import { envPublicSchema } from '@/env/public';
 
 export function SignUpForm() {
   const t = useI18n();
   const router = useRouter();
   const toast = useRef<Toast>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const { isLoaded, signUp } = useSignUp();
-  const { control, handleSubmit } = useForm<FormSignUpFields>({
-    resolver: zodResolver(formSchema),
-    defaultValues: initialValues,
-  });
+  const { isLoaded, signUp, setActive } = useSignUp();
+  const [{ formState }, dispatch] = useReducer(reducer, initialState);
+  const createDatabaseUser = useCreateDatabaseUser(signUp);
+
+  const allowedToVerifyEmail = shouldVerifyEmailByCode(signUp);
+  const missingFieldsExists = shouldFillMissingFields(signUp);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    if (missingFieldsExists) {
+      dispatch(getFormStateAction('missing-fields'));
+    } else if (allowedToVerifyEmail) {
+      dispatch(getFormStateAction('email-verify'));
+    }
+  }, [allowedToVerifyEmail, isLoaded, missingFieldsExists]);
 
   if (!isLoaded) {
     return <FormSkeleton rows={4} />;
   }
 
-  const onSignUp: SubmitHandler<FormSignUpFields> = async ({
-    email,
-    password,
-    username,
-    firstname,
-    lastname,
-  }) => {
+  const onComplete = async () => {
     try {
-      setIsLoading(true);
+      await createDatabaseUser();
 
-      await signUp.create({
-        emailAddress: email,
-        password,
-        username,
-        firstName: firstname,
-        lastName: lastname,
-      });
+      const { createdSessionId } = signUp;
+      await setActive({ session: createdSessionId });
 
-      await signUp.prepareEmailAddressVerification({
-        strategy: 'email_code',
-      });
-
-      router.push('/sign-up/verify');
-    } catch (error: unknown) {
-      handleAuthError(error, toast, t);
-      setIsLoading(false);
+      router.push(envPublicSchema.AFTER_SIGN_UP_URL);
+    } catch (err) {
+      handleAPIError(err, toast, t);
     }
   };
 
   return (
-    <form key="signUp" onSubmit={handleSubmit(onSignUp)}>
+    <>
       <Toast ref={toast} />
-      <FormRow>
-        <SignUpFormTextField
-          label={t('form.username.label')}
-          autoComplete="username"
-          control={control}
-          name={FormFields.USERNAME}
-          disabled={isLoading}
-          autoFocus
-          minLength={3}
-          required
+      {formState === 'initial' && (
+        <SignUpCredentialsForm
+          signUp={signUp}
+          onComplete={onComplete}
+          verifyEmail={allowedToVerifyEmail}
         />
-      </FormRow>
-      <FormRow>
-        <SignUpFormTextField
-          label={t('form.email.label')}
-          autoComplete="email"
-          control={control}
-          name={FormFields.EMAIL}
-          disabled={isLoading}
-          type="email"
-          required
-        />
-      </FormRow>
-      <FormRow>
-        <SignUpFormPassword
-          name={FormFields.PASSWORD}
-          control={control}
-          disabled={isLoading}
-          feedback
-          required
-        />
-      </FormRow>
-      <FormRow multipleRowFields>
-        <SignUpFormTextField
-          label="First name"
-          autoComplete="given-name"
-          control={control}
-          disabled={isLoading}
-          name={FormFields.FIRSTNAME}
-        />
-        <SignUpFormTextField
-          label="Last name"
-          autoComplete="family-name"
-          control={control}
-          disabled={isLoading}
-          name={FormFields.LASTNAME}
-        />
-      </FormRow>
-      <FormRow noMargin>
-        <Button
-          label={t('button.signUp')}
-          type="submit"
-          className="w-full"
-          loading={isLoading}
-        />
-      </FormRow>
-      <Divider align="center">{t('form.auth.socials')}</Divider>
-      <FormRow>
-        <Button
-          severity="secondary"
-          label={t('button.signUp')}
-          type="button"
-          className="w-full"
-        />
-      </FormRow>
-    </form>
+      )}
+      {formState === 'email-verify' && (
+        <SignUpEmailVerifyForm signUp={signUp} onComplete={onComplete} />
+      )}
+      {formState === 'missing-fields' && (
+        <SignUpMissingFieldsForm signUp={signUp} onComplete={onComplete} />
+      )}
+    </>
   );
 }

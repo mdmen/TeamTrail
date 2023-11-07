@@ -1,4 +1,4 @@
-# TeamTrail
+# <img src="./src/assets/images/logo.svg" width="30" align="top"/> TeamTrail
 
 [![GNU General Public License v3.0](https://img.shields.io/badge/GNU_GPLv3-License-blue.svg?style=flat-square)](./LICENSE)
 

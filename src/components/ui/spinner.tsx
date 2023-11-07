@@ -7,7 +7,7 @@ interface SpinnerProps {
 
 export function Spinner({ fullscreen }: SpinnerProps) {
   const fullscreenClasses = fullscreen
-    ? ['fixed', 'z-50', 'bg-[--surface-ground]']
+    ? ['fixed', 'z-50', 'bg-[--surface-ground]', 'inset-0']
     : '';
 
   return (

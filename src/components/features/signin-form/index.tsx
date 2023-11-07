@@ -17,7 +17,9 @@ import {
   FormFields,
 } from './schema';
 import { useI18n } from '@/locales/client';
-import { handleAuthError } from '@/lib/helpers';
+import { handleAPIError } from '@/lib/helpers';
+import { OAuthForm } from '../oauth-form';
+import { envPublicSchema } from '@/env/public';
 
 export function SignInForm() {
   const t = useI18n();
@@ -53,9 +55,9 @@ export function SignInForm() {
       }
 
       await setActive({ session: result.createdSessionId });
-      router.push(process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL as string);
+      router.push(envPublicSchema.AFTER_SIGN_IN_URL);
     } catch (error: unknown) {
-      handleAuthError(error, toast, t);
+      handleAPIError(error, toast, t);
       setIsLoading(false);
     }
   };
@@ -83,7 +85,7 @@ export function SignInForm() {
           required
         />
       </FormRow>
-      <FormRow noMargin>
+      <FormRow margin="none">
         <Button
           label={t('button.signIn')}
           type="submit"
@@ -92,14 +94,7 @@ export function SignInForm() {
         />
       </FormRow>
       <Divider align="center">{t('form.auth.socials')}</Divider>
-      <FormRow>
-        <Button
-          severity="secondary"
-          label={t('button.signUp')}
-          type="button"
-          className="w-full"
-        />
-      </FormRow>
+      <OAuthForm type="signIn" auth={signIn} />
     </form>
   );
 }

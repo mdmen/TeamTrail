@@ -2,12 +2,12 @@ import { Skeleton } from '@/components/ui';
 import { cn } from '@/lib/helpers';
 
 interface FormRowProps extends React.PropsWithChildren {
-  noMargin?: boolean;
+  margin?: 'none' | 'small' | 'large';
   multipleRowFields?: boolean;
 }
 
 export function FormRow({
-  noMargin,
+  margin = 'large',
   multipleRowFields,
   children,
 }: FormRowProps) {
@@ -27,7 +27,7 @@ export function FormRow({
     <div
       className={cn(
         multipleFieldClasses,
-        { 'mb-6': !noMargin },
+        { 'mb-6': margin === 'large', 'mb-3': margin === 'small' },
         'w-full',
         '[&_.p-inputtext]:w-full',
         '[&_.p-inputwrapper]:w-full',

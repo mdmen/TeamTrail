@@ -1,12 +1,35 @@
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  ApolloLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { auth } from '@clerk/nextjs';
 import { registerApolloClient } from '@apollo/experimental-nextjs-app-support/rsc';
-import { envCommonSchema } from '@/env/common';
+import { envPublicSchema } from '@/env/public';
 
 export const { getClient } = registerApolloClient(() => {
+  const { getToken } = auth();
+
+  const authLink = setContext(async (_, { headers }) => {
+    const token = await getToken();
+
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
+
+  const httpLink = new HttpLink({
+    uri: envPublicSchema.API_URL,
+    credentials: 'include',
+  });
+
   return new ApolloClient({
     cache: new InMemoryCache(),
-    link: new HttpLink({
-      uri: envCommonSchema.NEXT_PUBLIC_API_URL,
-    }),
+    link: ApolloLink.from([authLink, httpLink]),
   });
 });

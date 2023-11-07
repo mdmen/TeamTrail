@@ -29,6 +29,15 @@ export type Scalars = {
   Float: { input: number; output: number };
 };
 
+export type CreateUserInput = {
+  email: Scalars['String']['input'];
+  id: Scalars['ID']['input'];
+  image?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  username: Scalars['String']['input'];
+};
+
 export type Location = {
   __typename?: 'Location';
   city?: Maybe<Scalars['String']['output']>;
@@ -37,21 +46,21 @@ export type Location = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addUser?: Maybe<User>;
+  createUser?: Maybe<User>;
 };
 
-export type MutationAddUserArgs = {
-  email?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['ID']['input']>;
+export type MutationCreateUserArgs = {
+  input: CreateUserInput;
 };
 
 export type Query = {
   __typename?: 'Query';
-  users: Array<User>;
+  me: User;
+  user: User;
 };
 
-export type QueryUsersArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
+export type QueryUserArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type User = {
@@ -61,42 +70,63 @@ export type User = {
   image?: Maybe<Scalars['String']['output']>;
   location?: Maybe<Location>;
   name?: Maybe<Scalars['String']['output']>;
-  nickname: Scalars['String']['output'];
+  phone?: Maybe<Scalars['String']['output']>;
+  username: Scalars['String']['output'];
 };
 
-export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
+export type CreateUserMutationVariables = Exact<{
+  input: CreateUserInput;
+}>;
 
-export type GetUsersQuery = {
-  __typename?: 'Query';
-  users: Array<{
-    __typename?: 'User';
-    id: string;
-    name?: string | null;
-    nickname: string;
-    email: string;
-  }>;
+export type CreateUserMutation = {
+  __typename?: 'Mutation';
+  user?: { __typename?: 'User'; id: string } | null;
 };
 
-export const GetUsersDocument = {
+export const CreateUserDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetUsers' },
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'CreateUser' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CreateUserInput' },
+            },
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'users' },
+            alias: { kind: 'Name', value: 'user' },
+            name: { kind: 'Name', value: 'createUser' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' },
+                },
+              },
+            ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'nickname' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
               ],
             },
           },
@@ -104,4 +134,4 @@ export const GetUsersDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;

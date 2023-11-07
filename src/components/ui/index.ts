@@ -9,4 +9,5 @@ export { Toast } from 'primereact/toast';
 export { Message } from 'primereact/message';
 
 export { Spinner } from './spinner';
+export { BrandButton } from './brand-button';
 export { FormRow, FormSkeleton, FloatLabel } from './form-layout';

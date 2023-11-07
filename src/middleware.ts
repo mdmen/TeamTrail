@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createI18nMiddleware } from 'next-international/middleware';
 import { authMiddleware } from '@clerk/nextjs';
 import type { Locale } from './types';
+import { envPublicSchema } from './env/public';
 
 const i18nMiddleware = createI18nMiddleware({
   locales: ['en', 'ru'] satisfies Locale[],
@@ -12,24 +13,19 @@ export default authMiddleware({
   beforeAuth: (req) => {
     return i18nMiddleware(req);
   },
-  afterAuth({ userId, isPublicRoute }, req) {
+  afterAuth({ userId, isPublicRoute }, { url }) {
     if (!isPublicRoute && !userId) {
-      return NextResponse.redirect(
-        new URL(process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL as string, req.url),
-      );
+      return NextResponse.redirect(new URL(envPublicSchema.SIGN_IN_URL, url));
     } else if (isPublicRoute && userId) {
       return NextResponse.redirect(
-        new URL(
-          process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL as string,
-          req.url,
-        ),
+        new URL(envPublicSchema.AFTER_SIGN_IN_URL, url),
       );
     }
   },
   publicRoutes: [
     '/:locale/sign-up',
-    '/:locale/sign-up/verify',
     '/:locale/sign-in',
+    '/:locale/oauth-callback',
   ],
 });
 

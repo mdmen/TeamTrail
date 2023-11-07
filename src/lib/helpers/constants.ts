@@ -1,4 +1,4 @@
-import { envCommonSchema } from '../../env/common';
+import { envPublicSchema } from '../../env/public';
 
 export const appNamespace = 'team-trail';
-export const isProduction = envCommonSchema.NODE_ENV === 'production';
+export const isProduction = envPublicSchema.NODE_ENV === 'production';

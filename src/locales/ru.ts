@@ -14,6 +14,7 @@ export default {
   'button.signUp': 'Sign Up',
   'button.signIn': 'Login',
   'button.send': 'Send',
+  'button.tryAgain': 'Try again',
 
   'form.username.label': 'Username',
   'form.email.label': 'Email',
@@ -26,6 +27,7 @@ export default {
   'form.code.help': 'Please check your email for the verification code',
   'form.identifier.label': 'Username or email',
   'form.auth.socials': 'or with socials',
+  'form.missingFields.note': 'Please fill the missing fields',
 
   'error.common.title': 'An error has occurred',
   'error.common.description':

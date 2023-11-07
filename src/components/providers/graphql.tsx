@@ -1,6 +1,9 @@
 'use client';
 
+import { useCallback } from 'react';
 import { HttpLink, ApolloLink } from '@apollo/client';
+import { useAuth } from '@clerk/nextjs';
+import { setContext } from '@apollo/client/link/context';
 import {
   NextSSRApolloClient,
   ApolloNextAppProvider,
@@ -8,27 +11,43 @@ import {
   SSRMultipartLink,
 } from '@apollo/experimental-nextjs-app-support/ssr';
 import { isServer } from '@/lib/helpers';
-import { envCommonSchema } from '@/env/common';
+import { envPublicSchema } from '@/env/public';
 
-function makeClient() {
-  const httpLink = new HttpLink({
-    uri: envCommonSchema.NEXT_PUBLIC_API_URL,
-  });
+export function GraphQLProvider({ children }: React.PropsWithChildren) {
+  const { getToken } = useAuth();
 
-  return new NextSSRApolloClient({
-    cache: new NextSSRInMemoryCache(),
-    link: isServer()
+  const makeClient = useCallback(() => {
+    const authLink = setContext(async (_, { headers }) => {
+      const token = await getToken();
+
+      return {
+        headers: {
+          ...headers,
+          authorization: token ? `Bearer ${token}` : '',
+        },
+      };
+    });
+
+    const httpLink = new HttpLink({
+      uri: envPublicSchema.API_URL,
+      credentials: 'include',
+    });
+
+    const ssrLink = isServer()
       ? ApolloLink.from([
           new SSRMultipartLink({
             stripDefer: true,
           }),
           httpLink,
         ])
-      : httpLink,
-  });
-}
+      : httpLink;
 
-export function GraphQLProvider({ children }: React.PropsWithChildren) {
+    return new NextSSRApolloClient({
+      cache: new NextSSRInMemoryCache(),
+      link: ApolloLink.from([authLink, ssrLink]),
+    });
+  }, [getToken]);
+
   return (
     <ApolloNextAppProvider makeClient={makeClient}>
       {children}

@@ -1,13 +1,16 @@
 import z from 'zod';
-import { envCommonSchema } from './common';
 
-const schema = z.object({});
+const schema = z.object({
+  CLERK_SECRET_KEY: z.string().trim().min(1),
+});
 
-const parsed = schema.safeParse({});
+const parsed = schema.safeParse({
+  CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+});
 
 if (!parsed.success) {
   console.error(parsed.error.issues);
-  throw Error('There is an error with the environment variables');
+  throw Error('There is an error with the server environment variables');
 }
 
-export const envServerSchema = { ...envCommonSchema, ...parsed.data };
+export const envServerSchema = parsed.data;
