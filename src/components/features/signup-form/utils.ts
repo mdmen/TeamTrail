@@ -10,7 +10,7 @@ export function shouldVerifyEmailByCode(signUp?: SignUpResource) {
   );
 }
 
-export function shouldFillMissingFields(signUp?: SignUpResource) {
+export function isMissingFieldsExist(signUp?: SignUpResource) {
   if (!signUp) return false;
 
   return (

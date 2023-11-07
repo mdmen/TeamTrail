@@ -4,7 +4,7 @@ export default {
   'page.signUp.title': 'Create an account | TeamTrail',
   'page.signUp.caption': 'Create an account',
   'page.signUp.haveAccount': 'Already have an account? {link}',
-  'page.signIn.caption': 'Login into account',
+  'page.signIn.caption': 'Log into account',
   'page.signIn.title': 'Sign in | TeamTrail',
   'page.signIn.haveNoAccount': "Don't have an account? {link}",
 
@@ -12,7 +12,7 @@ export default {
   'common.signUp': 'Sign Up',
 
   'button.signUp': 'Sign Up',
-  'button.signIn': 'Login',
+  'button.signIn': 'Log in',
   'button.send': 'Send',
   'button.tryAgain': 'Try again',
 

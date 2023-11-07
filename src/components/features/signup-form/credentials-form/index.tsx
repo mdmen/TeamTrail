@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import type { SignUpResource } from '@clerk/types';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, FormRow, Divider, Toast } from '@/components/ui';
+import { Button, FormRow, Toast } from '@/components/ui';
 import {
   SignUpFormTextField,
   SignUpFormPassword,
@@ -17,7 +17,6 @@ import {
 } from './schema';
 import { useI18n } from '@/locales/client';
 import { handleAPIError } from '@/lib/helpers';
-import { OAuthForm } from '../../oauth-form';
 
 interface SignUpCredentialsFormProps {
   onComplete: () => void;
@@ -128,8 +127,6 @@ export function SignUpCredentialsForm({
           loading={isLoading}
         />
       </FormRow>
-      <Divider align="center">{t('form.auth.socials')}</Divider>
-      <OAuthForm type="signUp" auth={signUp} />
     </form>
   );
 }

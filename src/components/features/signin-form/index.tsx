@@ -1,100 +1,83 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useSignIn } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, FormRow, Divider, FormSkeleton, Toast } from '@/components/ui';
-import {
-  SignUpFormTextField,
-  SignUpFormPassword,
-} from '@/components/features/hook-form-fields';
-import {
-  type FormSignInFields,
-  formSchema,
-  initialValues,
-  FormFields,
-} from './schema';
+import { FormSkeleton, Toast, Divider, Button } from '@/components/ui';
 import { useI18n } from '@/locales/client';
 import { handleAPIError } from '@/lib/helpers';
-import { OAuthForm } from '../oauth-form';
 import { envPublicSchema } from '@/env/public';
+import { OAuthForm } from '../oauth-form';
+import { SignInCredentialsForm } from './credentials-form';
+import { SignInForgotPasswordForm } from './forgot-password-form';
+import { SignInResetPasswordForm } from './reset-password-form';
+
+type FormState = 'credentials' | 'forgot-password' | 'reset-password';
 
 export function SignInForm() {
   const t = useI18n();
   const router = useRouter();
   const toast = useRef<Toast>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const { isLoaded, signIn, setActive } = useSignIn();
-  const { control, handleSubmit } = useForm<FormSignInFields>({
-    resolver: zodResolver(formSchema),
-    defaultValues: initialValues,
-  });
+  const [formState, setFormState] = useState<FormState>('credentials');
 
   if (!isLoaded) {
     return <FormSkeleton rows={3} />;
   }
 
-  const onSubmit: SubmitHandler<FormSignInFields> = async ({
-    identifier,
-    password,
-  }) => {
+  const onComplete = async () => {
     try {
-      setIsLoading(true);
+      const { createdSessionId } = signIn;
+      await setActive({ session: createdSessionId });
 
-      const result = await signIn.create({
-        identifier,
-        password,
-      });
-
-      if (result.status !== 'complete') {
-        throw Error(
-          'Auth process is not configured for password authentication',
-        );
-      }
-
-      await setActive({ session: result.createdSessionId });
       router.push(envPublicSchema.AFTER_SIGN_IN_URL);
-    } catch (error: unknown) {
-      handleAPIError(error, toast, t);
-      setIsLoading(false);
+    } catch (err) {
+      handleAPIError(err, toast, t);
     }
   };
 
+  const BackToLogin = () => (
+    <Button
+      label="Back to login"
+      onClick={() => setFormState('credentials')}
+      className="mt-4 p-0"
+      text
+    />
+  );
+
   return (
-    <form key="signIn" onSubmit={handleSubmit(onSubmit)}>
+    <>
       <Toast ref={toast} />
-      <FormRow>
-        <SignUpFormTextField
-          label={t('form.identifier.label')}
-          autoComplete="username"
-          control={control}
-          name={FormFields.IDENTIFIER}
-          disabled={isLoading}
-          autoFocus
-          minLength={3}
-          required
-        />
-      </FormRow>
-      <FormRow>
-        <SignUpFormPassword
-          name={FormFields.PASSWORD}
-          control={control}
-          disabled={isLoading}
-          required
-        />
-      </FormRow>
-      <FormRow margin="none">
-        <Button
-          label={t('button.signIn')}
-          type="submit"
-          className="w-full"
-          loading={isLoading}
-        />
-      </FormRow>
-      <Divider align="center">{t('form.auth.socials')}</Divider>
-      <OAuthForm type="signIn" auth={signIn} />
-    </form>
+      {formState === 'credentials' && (
+        <>
+          <SignInCredentialsForm signIn={signIn} onComplete={onComplete} />
+          <Button
+            label="Forgot password?"
+            onClick={() => setFormState('forgot-password')}
+            className="mt-4 p-0"
+            text
+          />
+          <Divider align="center">{t('form.auth.socials')}</Divider>
+          <OAuthForm type="signIn" auth={signIn} />
+        </>
+      )}
+      {formState === 'forgot-password' && (
+        <>
+          <SignInForgotPasswordForm
+            signIn={signIn}
+            onComplete={() => {
+              setFormState('reset-password');
+            }}
+          />
+          <BackToLogin />
+        </>
+      )}
+      {formState === 'reset-password' && (
+        <>
+          <SignInResetPasswordForm signIn={signIn} onComplete={onComplete} />
+          <BackToLogin />
+        </>
+      )}
+    </>
   );
 }
