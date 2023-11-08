@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import logo from '../../../assets/images/logo.svg';
 
+export { generateMetadata } from './meta';
+
 export default function AuthLayout({ children }: React.PropsWithChildren) {
   return (
     <div className="flex min-h-screen w-full flex-col content-center items-center justify-center p-4 py-8">

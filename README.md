@@ -1,4 +1,4 @@
-# <img src="./src/assets/images/logo.svg" width="30" align="top"/> TeamTrail
+# <img src="./public/images/logo.svg" width="30" align="top"/> TeamTrail
 
 [![GNU General Public License v3.0](https://img.shields.io/badge/GNU_GPLv3-License-blue.svg?style=flat-square)](./LICENSE)
 
@@ -6,7 +6,7 @@
 
 ## Description
 
-A web application for collaboration within teams. Similar to Atlassian's [Jira](https://www.atlassian.com/software/jira) and [Trello](https://www.atlassian.com/software/trello). Created just for fun and educational purposes and slightly overengineered.
+A web application for collaboration within a team. Similar to Atlassian's [Jira](https://www.atlassian.com/software/jira) and [Trello](https://www.atlassian.com/software/trello). Created just for fun and educational purposes and slightly overengineered.
 
 <!--- screenshot gifs --->
 

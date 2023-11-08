@@ -6,7 +6,8 @@ export default function OAuthCallbackPage() {
     <>
       <Spinner fullscreen />
       <AuthenticateWithRedirectCallback
-        // need to complete signing up by creating a database user
+        // Intentionally redirect to Sign Up page
+        // because we need to create a database user
         afterSignUpUrl={process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL}
         afterSignInUrl={process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL}
         continueSignUpUrl={process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL}

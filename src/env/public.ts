@@ -9,6 +9,7 @@ const schema = z.object({
   AFTER_SIGN_IN_URL: z.string().trim().min(1),
   AFTER_SIGN_UP_URL: z.string().trim().min(1),
   OAUTH_CALLBACK_URL: z.string().trim().min(1),
+  WEBSITE_URL: z.string().trim().min(1),
 });
 
 const parsed = schema.safeParse({
@@ -20,6 +21,7 @@ const parsed = schema.safeParse({
   AFTER_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
   AFTER_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
   OAUTH_CALLBACK_URL: process.env.NEXT_PUBLIC_CLERK_OAUTH_CALLBACK_URL,
+  WEBSITE_URL: process.env.NEXT_PUBLIC_WEBSITE_URL,
 });
 
 if (!parsed.success) {

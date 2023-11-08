@@ -39,11 +39,7 @@ export function FormRow({
   );
 }
 
-interface FormSkeletonProps {
-  rows?: number;
-}
-
-export function FormSkeleton({ rows = 2 }: FormSkeletonProps) {
+export function FormSkeleton({ rows = 2 }: { rows?: number }) {
   return Array.from({ length: rows }).map((_, index) => {
     return (
       <Skeleton

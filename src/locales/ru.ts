@@ -1,11 +1,11 @@
 export default {
   'page.home.title': 'Welcome to the TeamTrail!',
   'page.home.description': 'Fullstack TypeScript collaboration web app',
-  'page.signUp.title': 'Create an account | TeamTrail',
+  'page.signUp.title': 'Create an account',
   'page.signUp.caption': 'Create an account',
   'page.signUp.haveAccount': 'Already have an account? {link}',
   'page.signIn.caption': 'Log into account',
-  'page.signIn.title': 'Sign in | TeamTrail',
+  'page.signIn.title': 'Sign in',
   'page.signIn.haveNoAccount': "Don't have an account? {link}",
 
   'common.signIn': 'Sign In',

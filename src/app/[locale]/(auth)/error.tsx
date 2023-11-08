@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout, FormFooter } from './common';
+import { FormLayout } from './common';
 import { ErrorHandler } from '@/components/features/error-handler';
 
 export default function AuthPageError({
@@ -11,11 +11,8 @@ export default function AuthPageError({
   reset: () => void;
 }) {
   return (
-    <>
-      <FormLayout>
-        <ErrorHandler error={error} reset={reset} />
-      </FormLayout>
-      <FormFooter />
-    </>
+    <FormLayout>
+      <ErrorHandler error={error} reset={reset} />
+    </FormLayout>
   );
 }

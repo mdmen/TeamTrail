@@ -10,4 +10,5 @@ export { Message } from 'primereact/message';
 
 export { Spinner } from './spinner';
 export { BrandButton } from './brand-button';
-export { FormRow, FormSkeleton, FloatLabel } from './form-layout';
+export * from './layout/form';
+export * from './layout/common';
