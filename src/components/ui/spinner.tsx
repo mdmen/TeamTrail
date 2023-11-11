@@ -7,11 +7,11 @@ interface SpinnerProps {
 
 export function Spinner({ fullscreen }: SpinnerProps) {
   const fullscreenClasses = fullscreen
-    ? ['fixed', 'z-50', 'bg-[--surface-ground]', 'inset-0']
+    ? 'fixed z-50 bg-[--surface-ground] inset-0'
     : '';
 
   return (
-    <div className={cn('grid', 'h-full', 'w-full', fullscreenClasses)}>
+    <div className={cn('grid h-full w-full', fullscreenClasses)}>
       <ProgressSpinner className="m-auto h-20 w-20" />
     </div>
   );

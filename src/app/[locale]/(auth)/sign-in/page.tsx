@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { SignInForm } from '@/components/features/signin-form';
 import { getI18n } from '@/locales/server';
-import { FormLayout, FormFooter } from '../common';
+import { SignInForm } from '../components/signin-form';
+import { FormLayout } from '../components/form-layout';
+import { FormFooter } from '../components/form-footer';
 
 export async function generateMetadata() {
   const t = await getI18n();
@@ -20,9 +21,11 @@ export default async function SignInPage() {
         <SignInForm />
       </FormLayout>
       <FormFooter>
-        {t('page.signIn.haveNoAccount', {
-          link: <Link href="/sign-up">{t('common.signUp')}</Link>,
-        })}
+        <p>
+          {t('page.signIn.haveNoAccount', {
+            link: <Link href="/sign-up">{t('common.signUp')}</Link>,
+          })}
+        </p>
       </FormFooter>
     </>
   );

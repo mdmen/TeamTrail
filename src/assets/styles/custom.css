@@ -34,6 +34,8 @@ h6 {
 
 p {
   margin: 0 0 1rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 p a {
@@ -45,8 +47,11 @@ p a:hover {
   text-decoration: underline;
 }
 
-.logo {
-  font-family: var(--font-coiny), sans-serif;
-  color: var(--surface-800);
-  line-height: 1;
+.p-menu {
+  width: auto;
+  min-width: min-content;
+}
+
+.p-menuitem-icon {
+  flex-shrink: 0;
 }

@@ -8,12 +8,13 @@ const config: Config = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    fontFamily: {
+      coiny: 'var(--font-coiny), sans-serif',
+    },
   },
   corePlugins: {
     preflight: false,
   },
-  plugins: [],
 };
 
 export default config;

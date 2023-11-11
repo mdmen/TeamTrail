@@ -1,7 +1,7 @@
 'use client';
 
-import { FormLayout } from './common';
-import { ErrorHandler } from '@/components/features/error-handler';
+import { FormLayout } from './components/form-layout';
+import { ErrorRecover } from '@/components/features/error-recover';
 
 export default function AuthPageError({
   error,
@@ -12,7 +12,7 @@ export default function AuthPageError({
 }) {
   return (
     <FormLayout>
-      <ErrorHandler error={error} reset={reset} />
+      <ErrorRecover error={error} reset={reset} />
     </FormLayout>
   );
 }

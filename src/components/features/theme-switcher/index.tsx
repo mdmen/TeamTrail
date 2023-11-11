@@ -2,10 +2,12 @@
 
 import { useTheme } from 'next-themes';
 import { useMounted } from '@/lib/hooks';
-import { Button } from '@/components/ui';
+import { Button, type ButtonProps } from '@/components/ui';
 import { Sun, Moon } from '@/components/icons';
 
-export function ThemeSwitcher() {
+interface ThemeSwitcherProps extends ButtonProps {}
+
+export function ThemeSwitcher(props: ThemeSwitcherProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const isMounted = useMounted();
 
@@ -13,7 +15,7 @@ export function ThemeSwitcher() {
   const label = isDark
     ? 'Switch to the light theme'
     : 'Switch to the dark theme';
-  const icon = isDark ? <Moon /> : <Sun />;
+  const icon = isDark ? <Moon size="1.7rem" /> : <Sun size="1.7rem" />;
 
   return (
     <Button
@@ -23,6 +25,7 @@ export function ThemeSwitcher() {
       severity="secondary"
       aria-label={isMounted ? label : ''}
       icon={isMounted ? icon : <Sun />}
+      {...props}
       onClick={() => {
         setTheme(isDark ? 'light' : 'dark');
       }}

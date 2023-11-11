@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { useCurrentLocale, useChangeLocale } from '@/locales/client';
 import {
   Button,
+  type ButtonProps,
   ListBox,
   OverlayPanel,
   type ListBoxChangeEvent,
@@ -35,7 +36,9 @@ const languageTemplate = ({ name, code }: Language) => {
   );
 };
 
-export function LocaleSwitcher() {
+interface LocaleSwitcherProps extends ButtonProps {}
+
+export function LocaleSwitcher(props: LocaleSwitcherProps) {
   const [isPanelVisible, setPanelVisible] = useState(false);
   const panelRef = useRef<OverlayPanel | null>(null);
   const currentLocale = useCurrentLocale();
@@ -50,7 +53,8 @@ export function LocaleSwitcher() {
         aria-label="Choose language"
         aria-haspopup="listbox"
         aria-expanded={isPanelVisible}
-        icon={<Languages />}
+        icon={<Languages size="1.7rem" />}
+        {...props}
         onClick={(e) => {
           panelRef.current?.toggle(e);
         }}
@@ -59,7 +63,7 @@ export function LocaleSwitcher() {
         ref={panelRef}
         onShow={() => setPanelVisible(true)}
         onHide={() => setPanelVisible(false)}
-        className="[&>.p-overlaypanel-content]:px-0"
+        className="[&_.p-overlaypanel-content]:px-0 [&_.p-overlaypanel-content]:py-1"
       >
         <ListBox
           value={languages.find(({ code }) => code === currentLocale)}

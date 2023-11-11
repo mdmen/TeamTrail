@@ -53,9 +53,5 @@
   "engines": {
     "node": ">=18",
     "npm": ">=9"
-  },
-  "author": {
-    "name": "Dmitry Menovshchikov",
-    "url": "https://github.com/mdmen"
   }
 }
