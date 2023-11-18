@@ -1,14 +1,13 @@
 import { persist } from 'zustand/middleware';
 import { type StateCreator } from 'zustand';
 import { appNamespace } from '@/lib/helpers';
-import type { Scale } from '@/types';
 
 export interface ConfigState {
-  scale: Scale;
+  sidebarCollapsed: boolean;
 }
 
 export interface ConfigActions {
-  setScale: (scale: Scale) => void;
+  setSidebarCollapsed: (sidebarCollapsed: boolean) => void;
 }
 
 export type ConfigSlice = ConfigState & ConfigActions;
@@ -19,13 +18,13 @@ export const createConfigSlice: StateCreator<
   [],
   ConfigSlice
 > = (set) => ({
-  scale: 'regular',
-  setScale: (scale: Scale) => set({ scale }),
+  sidebarCollapsed: false,
+  setSidebarCollapsed: (sidebarCollapsed: boolean) => set({ sidebarCollapsed }),
 });
 
 export const createPersistedConfigSlice = persist(createConfigSlice, {
   name: `${appNamespace}-config`,
-  partialize: ({ scale }) => ({
-    scale,
+  partialize: ({ sidebarCollapsed }) => ({
+    sidebarCollapsed,
   }),
 });

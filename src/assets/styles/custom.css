@@ -55,3 +55,20 @@ p a:hover {
 .p-menuitem-icon {
   flex-shrink: 0;
 }
+
+.p-tag.p-tag-rounded {
+  min-width: 1.625rem;
+}
+
+.p-badge {
+  font-size: 0.7rem;
+  padding: 0 0.3rem;
+  min-width: 1.3rem;
+  height: 1.3rem;
+  line-height: 1.3rem;
+  pointer-events: none;
+}
+
+svg.lucide {
+  min-width: min-content;
+}

@@ -1,6 +1,6 @@
 export function GithubIcon({
-  width = 24,
-  height = 24,
+  width = '1.7rem',
+  height = '1.7rem',
   ...props
 }: React.HTMLProps<SVGSVGElement>) {
   return (

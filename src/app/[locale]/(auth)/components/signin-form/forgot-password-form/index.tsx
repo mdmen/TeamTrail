@@ -56,7 +56,7 @@ export function SignInForgotPasswordForm({
         <Message
           className="w-full"
           severity="info"
-          text="You will get a code to reset your password via email."
+          text="You'll get a code to reset your password via email."
         />
       </FormRow>
       <FormRow>

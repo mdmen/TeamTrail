@@ -7,3 +7,9 @@
     font-family: var(--font-family);
   }
 }
+
+@layer components {
+  .break-words {
+    word-break: break-word;
+  }
+}

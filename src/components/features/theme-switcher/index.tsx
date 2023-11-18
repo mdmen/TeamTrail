@@ -12,9 +12,6 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
   const isMounted = useMounted();
 
   const isDark = resolvedTheme === 'dark';
-  const label = isDark
-    ? 'Switch to the light theme'
-    : 'Switch to the dark theme';
   const icon = isDark ? <Moon size="1.7rem" /> : <Sun size="1.7rem" />;
 
   return (
@@ -23,8 +20,8 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
       raised
       type="button"
       severity="secondary"
-      aria-label={isMounted ? label : ''}
-      icon={isMounted ? icon : <Sun />}
+      aria-label="Toggle theme"
+      icon={isMounted ? icon : <Sun size="1.7rem" />}
       {...props}
       onClick={() => {
         setTheme(isDark ? 'light' : 'dark');

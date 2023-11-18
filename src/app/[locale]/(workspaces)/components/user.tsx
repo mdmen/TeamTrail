@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { Avatar, Badge, Button, Menu, type MenuProps } from '@/components/ui';
 import { LogOut, UserCog, MailWarning, BellRing } from '@/components/icons';
 import { envPublicSchema } from '@/env/public';
-import { cn } from '@/lib/helpers';
+import { cn, focusFirstChild } from '@/lib/helpers';
 
 const src =
   'https://primefaces.org/cdn/primereact/images/organization/walter.jpg';
@@ -26,6 +26,8 @@ export function User() {
           <Link
             href="/profile"
             className={cn(className, 'flex w-full items-center')}
+            role="menuitem"
+            onClick={(e) => menuRef.current?.hide(e)}
           >
             <Avatar className="mr-2" size="xlarge" shape="circle">
               <Image src={src} width={56} height={56} alt="" />
@@ -42,7 +44,12 @@ export function User() {
     {
       template: (_, { className }) => {
         return (
-          <Link href="/chat" role="menuitem" className={className}>
+          <Link
+            href="/chat"
+            role="menuitem"
+            className={className}
+            onClick={(e) => menuRef.current?.hide(e)}
+          >
             <MailWarning
               size="1.5rem"
               className="p-menuitem-icon text-[--primary-color]"
@@ -57,7 +64,12 @@ export function User() {
     {
       template: (_, { className }) => {
         return (
-          <Link href="/notifications" role="menuitem" className={className}>
+          <Link
+            href="/notifications"
+            role="menuitem"
+            className={className}
+            onClick={(e) => menuRef.current?.hide(e)}
+          >
             <BellRing
               size="1.5rem"
               className="p-menuitem-icon text-[--indigo-500]"
@@ -72,7 +84,12 @@ export function User() {
     {
       template: (_, { className }) => {
         return (
-          <Link href="/profile/edit" role="menuitem" className={className}>
+          <Link
+            href="/profile/edit"
+            role="menuitem"
+            className={className}
+            onClick={(e) => menuRef.current?.hide(e)}
+          >
             <UserCog size="1.5rem" className="p-menuitem-icon" />
             <span className="p-menuitem-text">Edit profile</span>
           </Link>
@@ -97,15 +114,25 @@ export function User() {
         className="relative m-0 flex overflow-hidden rounded-full border-0 p-0"
         aria-controls={popupId}
         aria-haspopup
+        raised
       >
         <Avatar size="large" shape="circle">
           <Image src={src} width={42} height={42} alt="" />
         </Avatar>
       </Button>
-      <div>
-        <Badge value="8" severity="info" />
-      </div>
-      <Menu id={popupId} model={items} ref={menuRef} popup />
+      <Badge value="8" severity="info" />
+      <Menu
+        id={popupId}
+        // set focus on first item when using keyboard
+        onShow={({ detail }: CustomEventInit) => {
+          if (detail) return;
+
+          focusFirstChild(`#${popupId}`);
+        }}
+        model={items}
+        ref={menuRef}
+        popup
+      />
     </div>
   );
 }

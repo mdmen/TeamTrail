@@ -10,8 +10,13 @@ export {
   Bell,
   Image,
   ChevronLeft,
-  Home,
+  ChevronRight,
   LayoutDashboard,
+  KanbanSquare,
+  Users,
+  CalendarDays,
+  FileSpreadsheet,
+  ListTodo,
 } from 'lucide-react';
 
 export { GithubIcon } from './brands/github';

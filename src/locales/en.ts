@@ -8,6 +8,16 @@ export default {
   'page.signIn.title': 'Sign in',
   'page.signIn.haveNoAccount': "Don't have an account? {link}",
 
+  'navigation.page.home': 'Home',
+  'navigation.page.workspaces': 'Workspaces',
+  'navigation.page.boards': 'Boards',
+  'navigation.page.issues': 'Issues',
+  'navigation.page.chat': 'Chat',
+  'navigation.page.members': 'Members',
+  'navigation.page.calendar': 'Calendar',
+  'navigation.page.pages': 'Pages',
+  'navigation.page.notifications': 'Notifications',
+
   'common.signIn': 'Sign In',
   'common.signUp': 'Sign Up',
 
