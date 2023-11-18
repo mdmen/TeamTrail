@@ -2,8 +2,8 @@
 @import './tailwind.css';
 @import './custom.css';
 
-@import './themes/lara-blue-common.css';
-@import './themes/lara-blue-light.css';
-@import './themes/lara-blue-dark.css';
+@import './themes/lara-indigo-common.css';
+@import './themes/lara-indigo-light.css';
+@import './themes/lara-indigo-dark.css';
 
 @import './flag-icons.css';

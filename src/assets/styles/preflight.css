@@ -33,7 +33,7 @@
 html {
   line-height: 1.5;
   /* 1 */
-  /* -webkit-text-size-adjust: 100%; */
+  -webkit-text-size-adjust: 100%;
   /* 2 */
   -moz-tab-size: 4;
   /* 3 */
@@ -41,9 +41,9 @@ html {
   /* 3 */
   /* font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
   /* 4 */
-  /* font-feature-settings: normal; */
+  font-feature-settings: normal;
   /* 5 */
-  /* font-variation-settings: normal; */
+  font-variation-settings: normal;
   /* 6 */
 }
 
@@ -86,7 +86,7 @@ abbr:where([title]) {
 Remove the default font size and weight for headings.
 */
 
-/* h1,
+h1,
 h2,
 h3,
 h4,
@@ -94,16 +94,16 @@ h5,
 h6 {
   font-size: inherit;
   font-weight: inherit;
-} */
+}
 
 /*
 Reset links to optimize for opt-in styling instead of opt-out.
 */
 
-/* a {
+a {
   color: inherit;
   text-decoration: inherit;
-} */
+}
 
 /*
 Add the correct font weight in Edge and Safari.
@@ -133,29 +133,29 @@ pre {
 Add the correct font size in all browsers.
 */
 
-/* small {
+small {
   font-size: 80%;
-} */
+}
 
 /*
 Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 */
 
-/* sub,
+sub,
 sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
-} */
+}
 
-/* sub {
+sub {
   bottom: -0.25em;
 }
 
 sup {
   top: -0.5em;
-} */
+}
 
 /*
 1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
@@ -163,14 +163,14 @@ sup {
 3. Remove gaps between table borders by default.
 */
 
-/* table {
+table {
   text-indent: 0;
   /* 1 */
-/* border-color: inherit; */
-/* 2 */
-/* border-collapse: collapse; */
-/* 3 */
-/* } */
+  border-color: inherit;
+  /* 2 */
+  border-collapse: collapse;
+  /* 3 */
+}
 
 /*
 1. Change the font styles in all browsers.
@@ -207,10 +207,10 @@ textarea {
 Remove the inheritance of text transform in Edge and Firefox.
 */
 
-/* button,
+button,
 select {
   text-transform: none;
-} */
+}
 
 /*
 1. Correct the inability to style clickable types in iOS and Safari.
@@ -290,7 +290,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   /* 1 */
-  /* font: inherit; */
+  font: inherit;
   /* 2 */
 }
 
@@ -306,7 +306,7 @@ summary {
 Removes the default spacing and border for appropriate elements.
 */
 
-/* blockquote,
+blockquote,
 dl,
 dd,
 h1,
@@ -320,16 +320,16 @@ figure,
 p,
 pre {
   margin: 0;
-} */
+}
 
-/* fieldset {
+fieldset {
   margin: 0;
   padding: 0;
 }
 
 legend {
   padding: 0;
-} */
+}
 
 ol,
 ul,
