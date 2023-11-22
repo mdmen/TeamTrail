@@ -5,8 +5,11 @@ import Link from 'next/link';
 import { useRef, useId } from 'react';
 import { useClerk } from '@clerk/clerk-react';
 import { useRouter } from 'next/navigation';
-import { Avatar, Badge, Button, Menu, type MenuProps } from '@/components/ui';
-import { LogOut, UserCog, MailWarning, BellRing } from '@/components/icons';
+import { Avatar } from 'primereact/avatar';
+import { Badge } from 'primereact/badge';
+import { Button } from 'primereact/button';
+import { Menu, type MenuProps } from 'primereact/menu';
+import { LogOut, UserCog, MailWarning, BellRing } from 'lucide-react';
 import { envPublicSchema } from '@/env/public';
 import { cn, focusFirstChild } from '@/lib/helpers';
 

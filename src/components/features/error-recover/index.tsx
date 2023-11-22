@@ -2,7 +2,8 @@
 
 import { useEffect } from 'react';
 import { useI18n } from '@/locales/client';
-import { Message, Button } from '@/components/ui';
+import { Message } from 'primereact/message';
+import { Button } from 'primereact/button';
 
 export function ErrorRecover({
   error,

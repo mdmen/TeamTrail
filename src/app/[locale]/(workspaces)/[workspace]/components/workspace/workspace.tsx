@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 import { useCurrentLocale } from '@/locales/client';
-import { OverlayPanel } from '@/components/ui';
+import { OverlayPanel } from 'primereact/overlaypanel';
 import { PanelLayout } from '@/components/layouts';
 import { WorkspaceImage } from './image';
 import { WorkspaceInfo } from './info';

@@ -6,8 +6,8 @@ export function FormFooter({ children }: { children: React.ReactNode }) {
     <footer className="flex items-center justify-between">
       {children}
       <div className="flex gap-3">
-        <LocaleSwitcher />
-        <ThemeSwitcher />
+        <LocaleSwitcher rounded raised />
+        <ThemeSwitcher rounded raised />
       </div>
     </footer>
   );

@@ -3,7 +3,9 @@
 import { useRef, useState } from 'react';
 import { useSignIn } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import { Toast, Divider, Button } from '@/components/ui';
+import { Toast } from 'primereact/toast';
+import { Divider } from 'primereact/divider';
+import { Button } from 'primereact/button';
 import { FormSkeleton } from '@/components/layouts/form';
 import { useI18n } from '@/locales/client';
 import { handleAPIError } from '@/lib/helpers';

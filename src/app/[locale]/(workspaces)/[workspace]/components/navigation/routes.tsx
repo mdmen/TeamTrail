@@ -7,7 +7,7 @@ import {
   CalendarDays,
   FileSpreadsheet,
   ListTodo,
-} from '@/components/icons';
+} from 'lucide-react';
 import type { Locale } from '@/types';
 
 export interface Route {

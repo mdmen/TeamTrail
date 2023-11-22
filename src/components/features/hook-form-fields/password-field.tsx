@@ -1,7 +1,7 @@
 import { Controller, type Control, type Path } from 'react-hook-form';
 import { useI18n } from '@/locales/client';
 import { cn } from '@/lib/helpers';
-import { Password } from '@/components/ui';
+import { Password } from 'primereact/password';
 import { FloatLabel } from '@/components/layouts';
 
 interface FormFieldPasswordProps<TFields extends {}> {

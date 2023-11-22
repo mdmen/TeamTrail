@@ -1,7 +1,7 @@
 'use client';
 
 import { Fragment, useMemo } from 'react';
-import { Divider } from '@/components/ui';
+import { Divider } from 'primereact/divider';
 import { PanelLayout } from '@/components/layouts';
 import { useI18n, useCurrentLocale } from '@/locales/client';
 import { getRoutes } from './routes';

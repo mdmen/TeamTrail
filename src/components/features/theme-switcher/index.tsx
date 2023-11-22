@@ -2,8 +2,8 @@
 
 import { useTheme } from 'next-themes';
 import { useMounted } from '@/lib/hooks';
-import { Button, type ButtonProps } from '@/components/ui';
-import { Sun, Moon } from '@/components/icons';
+import { Button, type ButtonProps } from 'primereact/button';
+import { Sun, Moon } from 'lucide-react';
 
 interface ThemeSwitcherProps extends ButtonProps {}
 
@@ -16,10 +16,7 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
 
   return (
     <Button
-      rounded
-      raised
       type="button"
-      severity="secondary"
       aria-label="Toggle theme"
       icon={isMounted ? icon : <Sun size="1.7rem" />}
       {...props}

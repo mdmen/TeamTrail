@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui';
+import { Skeleton } from 'primereact/skeleton';
 import { cn } from '@/lib/helpers';
 
 interface FormRowProps extends React.PropsWithChildren {

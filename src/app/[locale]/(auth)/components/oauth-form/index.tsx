@@ -3,7 +3,7 @@ import type {
   SignInResource,
   OAuthStrategy,
 } from '@clerk/types';
-import { Button } from '@/components/ui';
+import { Button } from 'primereact/button';
 import { GoogleIcon, GithubIcon } from '@/components/icons';
 import { FormRow } from '@/components/layouts';
 import { envPublicSchema } from '@/env/public';

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Image as ImageIcon } from '@/components/icons';
+import { Image as ImageIcon } from 'lucide-react';
 
 interface WorkspaceImageProps {
   src?: string;

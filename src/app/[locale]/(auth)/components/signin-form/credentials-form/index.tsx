@@ -4,7 +4,8 @@ import { useState, useRef } from 'react';
 import type { SignInResource } from '@clerk/types';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Toast } from '@/components/ui';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 import { FormRow } from '@/components/layouts';
 import {
   FormFieldText,

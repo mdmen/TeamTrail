@@ -2,14 +2,10 @@
 
 import { useRef, useState } from 'react';
 import { useCurrentLocale, useChangeLocale } from '@/locales/client';
-import {
-  Button,
-  type ButtonProps,
-  ListBox,
-  OverlayPanel,
-  type ListBoxChangeEvent,
-} from '@/components/ui';
-import { Languages } from '@/components/icons';
+import { Button, type ButtonProps } from 'primereact/button';
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { ListBox, type ListBoxChangeEvent } from 'primereact/listbox';
+import { Languages } from 'lucide-react';
 import type { Locale } from '@/types';
 
 interface Language {
@@ -47,9 +43,7 @@ export function LocaleSwitcher(props: LocaleSwitcherProps) {
   return (
     <>
       <Button
-        rounded
-        raised
-        severity="secondary"
+        type="button"
         aria-label="Choose language"
         aria-haspopup="listbox"
         aria-expanded={isPanelVisible}

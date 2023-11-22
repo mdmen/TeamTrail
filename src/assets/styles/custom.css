@@ -22,7 +22,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 0.8em 0;
   font-family: inherit;
   font-weight: 600;
   line-height: 1.2;
@@ -44,6 +44,23 @@ p a {
 
 p a:hover {
   text-decoration: underline;
+}
+
+a.p-button {
+  text-decoration: none;
+  line-height: normal;
+}
+
+a.p-button:hover {
+  background: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+}
+
+.dark a.p-button:hover {
+  background: #91a3fb;
+  color: #1c2127;
+  border-color: #91a3fb;
 }
 
 .p-menu {

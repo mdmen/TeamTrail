@@ -1,7 +1,7 @@
 import { Controller, type Control, type Path } from 'react-hook-form';
 import { useI18n } from '@/locales/client';
 import { cn } from '@/lib/helpers';
-import { InputText } from '@/components/ui';
+import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from '@/components/layouts';
 
 interface FormFieldTextProps<TFields extends {}> {

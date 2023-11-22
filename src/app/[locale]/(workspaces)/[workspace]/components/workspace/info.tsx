@@ -1,4 +1,5 @@
-import { Tag, Tooltip } from '@/components/ui';
+import { Tag } from 'primereact/tag';
+import { Tooltip } from 'primereact/tooltip';
 
 interface WorkspaceInfoProps {
   name: string;

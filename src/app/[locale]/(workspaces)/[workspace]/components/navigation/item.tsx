@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { Tag, Badge, Tooltip } from '@/components/ui';
+import { Tag } from 'primereact/tag';
+import { Badge } from 'primereact/badge';
+import { Tooltip } from 'primereact/tooltip';
 import type { Route } from './routes';
 import { cn } from '@/lib/helpers';
 

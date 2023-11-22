@@ -4,15 +4,16 @@ import logo from '@/assets/images/logo.svg';
 import { ThemeSwitcher } from '@/components/features/theme-switcher';
 import { LocaleSwitcher } from '@/components/features/locale-switcher';
 import { User } from './user';
+import { HeaderSearch } from './header-search';
 import { PanelLayout } from '@/components/layouts';
 
 export function Header() {
   return (
     <header className="mb-4">
-      <PanelLayout className="flex items-center justify-between gap-3 rounded-none">
+      <PanelLayout className="flex flex-wrap items-center justify-between gap-3 rounded-none sm:flex-nowrap">
         <Link
           href="/"
-          className="flex items-end gap-2 text-[--surface-800] no-underline"
+          className="order-1 flex shrink-0 items-end gap-2 text-[--surface-800] no-underline"
         >
           <Image
             className="hidden sm:block"
@@ -25,9 +26,12 @@ export function Header() {
             TeamTrail
           </span>
         </Link>
-        <div className="flex items-center gap-3">
-          <ThemeSwitcher text />
-          <LocaleSwitcher text />
+        <div className="order-4 flex w-full min-w-0 grow justify-end sm:order-2">
+          <HeaderSearch />
+        </div>
+        <div className="order-3 flex shrink-0 items-center gap-3">
+          <ThemeSwitcher rounded raised text />
+          <LocaleSwitcher rounded raised text />
           <User />
         </div>
       </PanelLayout>
