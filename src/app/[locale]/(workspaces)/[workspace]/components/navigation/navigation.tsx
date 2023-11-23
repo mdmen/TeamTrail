@@ -17,7 +17,7 @@ export function Navigation({ workspaceCode }: NavigationProps) {
   const t = useI18n();
   const locale = useCurrentLocale();
   const mounted = useMounted();
-  const wideScreen = useMediaQuery('(min-width: 1024px)');
+  const wideScreen = useMediaQuery('lg');
 
   const routes = useMemo(
     () => getRoutes(locale, workspaceCode),

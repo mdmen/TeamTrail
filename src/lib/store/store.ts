@@ -1,13 +1,13 @@
 import { createStore } from 'zustand';
-import { createPersistedConfigSlice, type ConfigSlice } from './config';
+import { createPersistedUISlice, type UISlice } from './ui';
 
-export type Store = ConfigSlice;
+export type Store = UISlice;
 
 export type StoreType = ReturnType<typeof initializeStore>;
 
 export const initializeStore = (preloadedState: Partial<Store> = {}) => {
   return createStore<Store>((...args) => ({
     ...preloadedState,
-    ...createPersistedConfigSlice(...args),
+    ...createPersistedUISlice(...args),
   }));
 };

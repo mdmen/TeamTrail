@@ -17,7 +17,7 @@ export function Workspace({ code }: WorkspaceProps) {
   const panelRef = useRef<OverlayPanel | null>(null);
   const mounted = useMounted();
   const locale = useCurrentLocale();
-  const wideScreen = useMediaQuery('(min-width: 1024px)');
+  const wideScreen = useMediaQuery('lg');
 
   return (
     <>

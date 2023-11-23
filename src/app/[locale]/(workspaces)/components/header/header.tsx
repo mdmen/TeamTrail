@@ -3,9 +3,10 @@ import Image from 'next/image';
 import logo from '@/assets/images/logo.svg';
 import { ThemeSwitcher } from '@/components/features/theme-switcher';
 import { LocaleSwitcher } from '@/components/features/locale-switcher';
-import { User } from './user';
-import { HeaderSearch } from './header-search';
+import { User } from '../user';
+import { HeaderSearch } from './search';
 import { PanelLayout } from '@/components/layouts';
+import { HeaderSearchToggler } from './search-toggler';
 
 export function Header() {
   return (
@@ -26,10 +27,9 @@ export function Header() {
             TeamTrail
           </span>
         </Link>
-        <div className="order-4 flex w-full min-w-0 grow justify-end sm:order-2">
-          <HeaderSearch />
-        </div>
+        <HeaderSearch className="order-4 sm:order-2" />
         <div className="order-3 flex shrink-0 items-center gap-3">
+          <HeaderSearchToggler rounded raised text />
           <ThemeSwitcher rounded raised text />
           <LocaleSwitcher rounded raised text />
           <User />
