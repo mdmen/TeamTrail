@@ -16,7 +16,7 @@ export default function WorkspacesPage() {
   return (
     <div className="w-[50rem] max-w-full text-center">
       <Alert type="info" />
-      <h1 className="my-4">You have no workspaces right now</h1>
+      <h1 className="my-6">You have no workspaces right now</h1>
       <p className="my-4 text-xl font-medium">
         But you can join an existing public workspace
       </p>

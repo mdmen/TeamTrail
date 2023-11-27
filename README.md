@@ -2,11 +2,12 @@
 
 [![GNU General Public License v3.0](https://img.shields.io/badge/GNU_GPLv3-License-blue.svg?style=flat-square)](./LICENSE)
 
-**This repository contains a frontend part of the app. Backend is [here](https://github.com/mdmen/team-trail-backend).**
+> [!NOTE]  
+> This repository contains a frontend part of the app. Backend is [here](https://github.com/mdmen/team-trail-backend).
 
 ## Description
 
-A web application for collaboration within a team. Similar to Atlassian's [Jira](https://www.atlassian.com/software/jira) and [Trello](https://www.atlassian.com/software/trello). Created just for fun and educational purposes and slightly overengineered.
+Collaboration tool for small and medium teams. Similar to Atlassian's [Jira](https://www.atlassian.com/software/jira) and [Trello](https://www.atlassian.com/software/trello). Created just for fun and educational purposes and slightly overengineered.
 
 <!--- screenshot gifs --->
 
